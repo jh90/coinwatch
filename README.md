@@ -43,10 +43,9 @@ save frame vs save snapshot
   #id
   ?published
   /data
-    ?snapshot
-    type
-    start_time
-    end_time
+    ?snapshot/frame
+    graphtype
+    period
     interval
     ?aggregate
     base
