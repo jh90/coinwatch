@@ -8,7 +8,7 @@ export default class App extends React.Component {
   }
 
   getCoinList () {
-    daemon.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=BTC,USD,EUR')
+    daemon.get('https://www.cryptocompare.com/api/data/histominute/?e=CCCAGG&fsym=BTC&limit=93&tsym=USD')
           .then((response) => {
             console.log(response);
           });

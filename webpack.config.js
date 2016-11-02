@@ -4,12 +4,12 @@ module.exports = {
   devtool: 'source-map',
   entry: path.join(__dirname, 'client', 'index.jsx'),
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'client', 'static'),
     inline: true,
     port: 8080,
   },
   output: {
-    path: path.join(__dirname, 'dist', 'js'),
+    path: path.join(__dirname),
     filename: 'bundle.js',
   },
   module: {
