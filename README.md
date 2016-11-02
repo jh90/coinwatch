@@ -27,13 +27,31 @@ live
 today
 historical
 
-coinsnapshot
 price
-pricehistory
 histominute
 histohour
 histoday
 listofcoins
+
+save frame vs save snapshot
+
+/users
+  #id
+  email
+  name
+/saves
+  #id
+  ?published
+  /data
+    ?snapshot
+    type
+    start_time
+    end_time
+    interval
+    ?aggregate
+    base
+    format
+    outputs
 
 API
 
@@ -57,4 +75,5 @@ get transaction history(?)
 CRYPTOCOMPARE
 get prices
 get histo(min,hr,day)
-get snapshot
+get supported coins
+
