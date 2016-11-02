@@ -15,9 +15,9 @@ price ticker
 newsreel
 
 React+D3+Flexbox
-Rails or Express?
-PSQL or firebase?
-Heroku?
+Express
+firebase
+(/)Heroku?
 
 prices in USD/fiat
 prices in BTC
@@ -34,3 +34,27 @@ histominute
 histohour
 histoday
 listofcoins
+
+API
+
+DB
+get user
+new user
+edit user name/email
+delete user
+
+get saves
+get published saves
+new save
+delete save
+
+SHAPESHIFT
+post transaction
+display wallet content?
+check transaction status
+get transaction history(?)
+
+CRYPTOCOMPARE
+get prices
+get histo(min,hr,day)
+get snapshot
