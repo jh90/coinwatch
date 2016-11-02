@@ -3,9 +3,9 @@ const VolumeController = require('../controllers/volume_controller.js');
 
 const router = express.Router();
 
-//get day volume by coins
-//get volume history by coins + period and interval
-//get day volume by exchange and coin
-//get volume history by exchange, coin, period, interval
+//get day volume by coins &opt exchange
+router.get('/', VolumeController.getToday);
+//get volume history by coins + period and interval &opt exchange
+router.get('/histo', VolumeController.getHistory);
 
 module.exports = router;
