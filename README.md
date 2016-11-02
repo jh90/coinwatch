@@ -18,3 +18,19 @@ React+D3+Flexbox
 Rails or Express?
 PSQL or firebase?
 Heroku?
+
+prices in USD/fiat
+prices in BTC
+volume of exchange
+
+live
+today
+historical
+
+coinsnapshot
+price
+pricehistory
+histominute
+histohour
+histoday
+listofcoins
