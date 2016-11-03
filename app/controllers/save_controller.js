@@ -5,15 +5,15 @@ const Save = require('../models/save.js');
 
 class SaveController {
   static getPublishedSaves (req, res) {
-    saveDAO.all().on('value', (snapshot) => {
-      const saves = $.map(snapshot, (save, sid) => {
+    saveDAO.all().then((data) => {
+      const saves = $.map(data, (save, sid) => {
         if (save.published) {
           save['id'] = sid;
           const saveModel = new Save(save);
           return saveModel;
         }
       });
-      res.status(200).send(saves);
+      res.status(200).json(saves);
     });
   }
 
@@ -27,16 +27,22 @@ class SaveController {
           return saveModel;
         }
       });
-      res.status(200).send(saves);
+      res.status(200).json(saves);
     });
   }
 
-  static changeVisibility (req, res) {
-
+  static toggleVisibility (req, res) {
+    const sid = req.body.sid;
+    saveDAO.visible(sid).then((update) => {
+      res.status(200).json(update);
+    });
   }
 
   static deleteSave (req, res) {
-
+    const sid = req.body.sid;
+    saveDAO.delete(sid).then(() => {
+      res.status(200);
+    });
   }
 
   static saveSnapshot (req, res) {

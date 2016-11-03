@@ -8,7 +8,7 @@ router.get('/public', SaveController.getPublishedSaves);
 //get saves by user
 router.get('/user/:id', SaveController.getSavesByUser);
 //publish or unpublish existing save
-router.patch('/:id', SaveController.changeVisibility);
+router.patch('/:id', SaveController.toggleVisibility);
 //delete save
 router.delete('/:id', SaveController.deleteSave);
 //new saves
