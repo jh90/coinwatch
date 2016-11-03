@@ -2,12 +2,9 @@ const firebase = require('../../firebase.config.js');
 const daemon = require('superagent');
 
 class SaveDAO {
-  static allPublished () {
-
-  }
-
-  static allByUser () {
-
+  static all () {
+    const saveRef = firebase.database().ref('/saves');
+    return saveRef;
   }
 
   static changeVisibility () {

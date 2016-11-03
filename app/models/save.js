@@ -1,5 +1,6 @@
-class Snapshot {
-  constructor (title, data, user_id, is_public) {
+class Save {
+  constructor (id, title, data, user_id, is_public) {
+    this.id: id,
     this.title = title;
     // this.data = data;
     this.user_id = user_id;
@@ -7,4 +8,4 @@ class Snapshot {
   };
 }
 
-module.exports = Snapshot;
+module.exports = Save;
