@@ -1,4 +1,5 @@
 const daemon = require('superagent');
+const Coin = require('../models/coin.js');
 
 class CryptoCompare {
   static allCoins () {
@@ -7,7 +8,7 @@ class CryptoCompare {
                     const coins = response.data;
                     const coinModels = [];
                     for (let c of coins) {
-                      const clean = { name: c.FullName, };
+                      const clean = { sym: c.Name, name: c.CoinName };
                       const coin = new Coin(clean);
                       coinModels.push(coin);
                     }
@@ -47,7 +48,7 @@ class CryptoCompare {
                       data: clean,
                     };
                     return cleanData;
-                 })
+                 });
   }
 }
 
