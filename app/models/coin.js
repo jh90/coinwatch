@@ -4,3 +4,5 @@ class Coin {
     this.name = name;
   }
 }
+
+module.exports = Coin;

@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const TransactionRouter = require('./routes/transaction_router.js'),
-      PriceRouter = require('./routes/price_router.js'),
-      UserRouter = require('./routes/user_router.js'),
-      SaveRouter = require('./routes/save_router.js'),
-      VolumeRouter = require('./routes/volume_router');
+const transactionRouter = require('./routes/transaction_router.js'),
+      priceRouter = require('./routes/price_router.js'),
+      userRouter = require('./routes/user_router.js'),
+      saveRouter = require('./routes/save_router.js'),
+      volumeRouter = require('./routes/volume_router');
 
 const app = express();
 

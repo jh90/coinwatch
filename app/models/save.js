@@ -1,6 +1,6 @@
 class Save {
   constructor (id, title, data, user_id, is_public) {
-    this.id: id,
+    this.id = id;
     this.title = title;
     // this.data = data;
     this.user_id = user_id;

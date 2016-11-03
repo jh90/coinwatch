@@ -8,6 +8,7 @@ export default class App extends React.Component {
   }
 
   getCoinList () {
+    console.log('app method hit');
     daemon.get('/api/prices/index')
           .then((response) => {
             console.log(response);
@@ -15,6 +16,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount () {
+    console.log('mounted');
     this.getCoinList();
   }
 

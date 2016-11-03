@@ -5,12 +5,13 @@ class CryptoCompare {
   static allCoins () {
     return daemon.get("https://www.cryptocompare.com/api/data/coinlist/")
                  .then((response) => {
-                    const coins = response.data;
+                    const parsedResponse = JSON.parse(response.res.text);
+                    const coins = parsedResponse.Data;
                     const coinModels = [];
-                    for (let c of coins) {
-                      const clean = { sym: c.Name, name: c.CoinName };
-                      const coin = new Coin(clean);
-                      coinModels.push(coin);
+                    for (let sym in coins) {
+                      const coin = coins[sym];
+                      const coinModel = new Coin(sym, coin.CoinName);
+                      coinModels.push(coinModel);
                     }
                     return coinModels;
                  });
@@ -52,4 +53,4 @@ class CryptoCompare {
   }
 }
 
-modules.export = CryptoCompare;
+module.exports = CryptoCompare;
