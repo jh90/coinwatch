@@ -8,7 +8,12 @@ class PriceController {
   }
 
   static getSpotPrice (req, res) {
-
+    const coinFrom = req.query.coinfrom;
+    const coinTo = req.query.cointo;
+    cryptocompare.spotData(coinFrom, coinTo).then((response) => {
+      console.log(response);
+      res.status(200).json(response);
+    });
   }
 
   static getPriceHistory (req, res) {

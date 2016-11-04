@@ -4,20 +4,24 @@ import daemon from 'superagent';
 export default class App extends React.Component {
   constructor () {
     super();
-    this.getCoinList = this.getCoinList.bind(this);
   }
 
   getCoinList () {
-    console.log('app method hit');
     daemon.get('/api/prices/index')
           .then((response) => {
             console.log(response);
           });
   }
 
+  getSpotData (coinFrom, coinTo) {
+    daemon.get(`/api/prices/?coinfrom=${coinFrom}&cointo=${coinTo}`)
+          .then((response) => {
+            console.log(response);
+          });
+  }
+
   componentDidMount () {
-    console.log('mounted');
-    this.getCoinList();
+    this.getSpotData('BTC', 'USD');
   }
 
   render () {

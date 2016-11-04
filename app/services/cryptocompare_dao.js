@@ -20,10 +20,12 @@ class CryptoCompare {
   static spotData (coinFrom, coinTo) {
     return daemon.get(`https://www.cryptocompare.com/api/data/price?fsym=${coinFrom}&tsyms=${coinTo}`)
                  .then((response) => {
+                    console.log(response.res.body, 'body');
+                    const parsedResponse = JSON.parse(response.res.text);
                     const cleanData = {
-                      price: response.data[0].price,
-                      volume24hFrom: response.data[0].Volume24Hours,
-                      volume24hTo: response.data[0].VolumeTo24HoursTo,
+                      price: parsedResponse.Data[0].Price,
+                      volume24hFrom: parsedResponse.Data[0].Volume24Hours,
+                      volume24hTo: parsedResponse.Data[0].VolumeTo24HoursTo,
                     };
                     return cleanData;
                  });
