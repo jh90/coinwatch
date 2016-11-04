@@ -1,27 +1,27 @@
 const cryptocompare = require('../services/cryptocompare_dao.js');
 
-class PriceController {
+class DataController {
   static listAllCoins (req, res) {
-    cryptocompare.allCoins().then((coins) => {
-      res.status(200).json(coins);
+    cryptocompare.all().then((response) => {
+      res.status(200).json(response);
     });
   }
 
-  static getSpotPrice (req, res) {
+  static getSpotData (req, res) {
     const coinFrom = req.query.coinfrom;
     const coinTo = req.query.cointo;
-    cryptocompare.spotData(coinFrom, coinTo).then((response) => {
-      res.status(200).json(response.price);
+    cryptocompare.spot(coinFrom, coinTo).then((response) => {
+      res.status(200).json(response);
     });
   }
 
-  static getPriceHistory (req, res) {
+  static getHistory (req, res) {
     req.query['exchange'] = req.query['exchange'] || false;
     req.query['interval'] = req.query['interval'] || false;
-    cryptocompare.getHistory(req.query).then((response) => {
+    cryptocompare.history(req.query).then((response) => {
       res.status(200).json(response);
     });
   }
 }
 
-module.exports = PriceController;
+module.exports = DataController;

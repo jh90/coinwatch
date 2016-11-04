@@ -7,38 +7,42 @@ export default class App extends React.Component {
   }
 
   getCoinList () {
-    daemon.get('/api/prices/index')
+    daemon.get('/api/data/index')
           .then((response) => {
             console.log(response);
           });
   }
 
   getSpotData (coinFrom, coinTo) {
-    daemon.get(`/api/prices/?coinfrom=${coinFrom}&cointo=${coinTo}`)
+    daemon.get(`/api/data/?coinfrom=${coinFrom}&cointo=${coinTo}`)
           .then((response) => {
             console.log(response);
           });
   }
 
   getHistory (data) {
-    console.log('app');
     const { unit, length, interval, coinFrom, coinTo, exchange } = data;
     const eQuery = exchange ? `&exchange=${exchange}` : '';
     const iQuery = interval ? `&interval=${interval}` : '';
     const queryString = `unit=${unit}&length=${length-1}&coinFrom=${coinFrom}&coinTo=${coinTo}${eQuery}${iQuery}`;
-    daemon.get(`/api/prices/histo?${queryString}`).then((response) => {
+    daemon.get(`/api/data/histo?${queryString}`).then((response) => {
       console.log(response);
     });
   }
 
-  componentDidMount () {
-    const data = {
-      unit: 'hour',
-      length: 24,
-      coinFrom: 'BTC',
-      coinTo: 'USD',
-    };
-    this.getHistory(data);
+  registerUser ({user, name, password}) {
+    daemon.post('/api/users').send({user, name, password})
+          .then((response) => {
+            console.log(response);
+          });
+  }
+
+  logInUser (data) {
+    const { user, password } = data;
+    daemon.post('/api/users/login').send({user, password})
+          .then((response) => {
+            console.log(response);
+          });
   }
 
   render () {

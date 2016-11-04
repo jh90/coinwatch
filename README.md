@@ -1,3 +1,7 @@
+.then(() => {
+              this.props.router.push('/');
+            });
+
 graphs
   cryptocompare API
   from user-given coin, exchange, and time parameters

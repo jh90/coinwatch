@@ -2,7 +2,7 @@ const daemon = require('superagent');
 const Coin = require('../models/coin.js');
 
 class CryptoCompare {
-  static allCoins () {
+  static all () {
     return daemon.get("https://www.cryptocompare.com/api/data/coinlist/")
                  .then((response) => {
                     const parsedResponse = JSON.parse(response.res.text);
@@ -17,7 +17,7 @@ class CryptoCompare {
                  });
   }
 
-  static spotData (coinFrom, coinTo) {
+  static spot (coinFrom, coinTo) {
     return daemon.get(`https://www.cryptocompare.com/api/data/price?fsym=${coinFrom}&tsyms=${coinTo}`)
                  .then((response) => {
                     console.log(response.res.body, 'body');
@@ -31,7 +31,7 @@ class CryptoCompare {
                  });
   }
 
-  static getHistory (data) {
+  static history (data) {
     const { unit, length, interval, coinFrom, coinTo, exchange } = data;
     const baseURL = `https://www.cryptocompare.com/api/data/histo${unit}/?`;
     const aggregate = interval ? `&aggregate=${interval}` : '';
@@ -39,18 +39,18 @@ class CryptoCompare {
     return daemon.get(`${baseURL}${e}&fsym=${coinFrom}&tsym=${coinTo}&limit=${length}${aggregate}`)
                  .then((response) => {
                     const parsedResponse = JSON.parse(response.res.text);
-                    const data = parsedResponse.Data;
-                    const clean = data.map((snapshot) => {
-                      const cleanSnapshot = {
-                        closingPrice: snapshot.close,
-                        volumeFrom: snapshot.volumefrom,
-                        volumeTo: snapshot.volumeto,
+                    const samples = parsedResponse.Data;
+                    const cleaned = samples.map((sample) => {
+                      const cleanSample = {
+                        closingPrice: sample.close,
+                        volumeFrom: sample.volumefrom,
+                        volumeTo: sample.volumeto,
                       };
-                      return cleanSnapshot;
+                      return cleanSample;
                     });
                     const cleanData = {
                       hasFirstValue: response.FirstValueInArray,
-                      data: clean,
+                      data: cleaned,
                     };
                     return cleanData;
                  });
