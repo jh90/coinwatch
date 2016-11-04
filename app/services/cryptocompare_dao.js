@@ -31,13 +31,15 @@ class CryptoCompare {
                  });
   }
 
-  static getHistory (unit, length, interval, coinFrom, coinTo, exchange) {
+  static getHistory (data) {
+    const { unit, length, interval, coinFrom, coinTo, exchange } = data;
     const baseURL = `https://www.cryptocompare.com/api/data/histo${unit}/?`;
-    const aggregate = interval !== 1 ? `&aggregate=${interval}` : '';
+    const aggregate = interval ? `&aggregate=${interval}` : '';
     const e = !exchange ? 'e=CCCAGG' : `e=${exchange}`;
     return daemon.get(`${baseURL}${e}&fsym=${coinFrom}&tsym=${coinTo}&limit=${length}${aggregate}`)
                  .then((response) => {
-                    const data = response.data;
+                    const parsedResponse = JSON.parse(response.res.text);
+                    const data = parsedResponse.Data;
                     const clean = data.map((snapshot) => {
                       const cleanSnapshot = {
                         closingPrice: snapshot.close,

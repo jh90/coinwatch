@@ -17,7 +17,11 @@ class PriceController {
   }
 
   static getPriceHistory (req, res) {
-
+    req.query['exchange'] = req.query['exchange'] || false;
+    req.query['interval'] = req.query['interval'] || false;
+    cryptocompare.getHistory(req.query).then((response) => {
+      res.status(200).json(response);
+    });
   }
 }
 
