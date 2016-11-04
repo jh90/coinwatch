@@ -25,7 +25,7 @@ export default class App extends React.Component {
     const { unit, length, interval, coinFrom, coinTo, exchange } = data;
     const eQuery = exchange ? `&exchange=${exchange}` : '';
     const iQuery = interval ? `&interval=${interval}` : '';
-    const queryString = `unit=${unit}&length=${length}&coinFrom=${coinFrom}&coinTo=${coinTo}${eQuery}${iQuery}`;
+    const queryString = `unit=${unit}&length=${length-1}&coinFrom=${coinFrom}&coinTo=${coinTo}${eQuery}${iQuery}`;
     daemon.get(`/api/prices/histo?${queryString}`).then((response) => {
       console.log(response);
     });
