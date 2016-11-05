@@ -42,6 +42,9 @@ export default class App extends React.Component {
     const childrenWithProps = React.cloneElement(this.props.children, {
       setCurrentUser: this.setCurrentUser,
       currentUser: this.state.currentUser,
+      getHistory: this.getHistory,
+      getSpotData: this.getSpotData,
+      getCoinList: this.getCoinList,
     });
     return (
       <div className="app-container">

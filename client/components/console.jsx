@@ -1,7 +1,12 @@
 import React from 'react';
-import daemon from 'superagent';
+import Modal from 'react-modal';
 import { Link } from 'react-router';
+import daemon from 'superagent';
 import firebase from '../../firebase.config.js';
+
+import Dashboard from './dashboard.jsx';
+import Window from './window.jsx';
+import Ticker from './ticker.jsx';
 
 const propTypes = {
   currentUser: React.PropTypes.object,
