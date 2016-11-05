@@ -1,6 +1,23 @@
-.then(() => {
-              this.props.router.push('/');
-            });
+daemon.post('/api/users/login').send({ user, password })
+          .then((response) => {
+            console.log(response);
+            this.props.router.push('/main/console');
+          });
+  static login (user, password) {
+    console.log('dao');
+    return firebase.auth().signInWithEmailAndPassword(user, password)
+      .catch((err) => {
+        console.log(`${err.code} ${err.message}`);
+      })
+      .then((user) => {
+        req.sesssion.currentUser = user;
+        console.log(user);
+        const userModel = new User(user);
+        return userModel;
+      });
+
+  }
+
 
 graphs
   cryptocompare API

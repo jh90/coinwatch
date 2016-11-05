@@ -4,6 +4,14 @@ import daemon from 'superagent';
 export default class App extends React.Component {
   constructor () {
     super();
+    this.state = {
+      currentUser: {},
+    };
+    this.setCurrentUser = this.setCurrentUser.bind(this);
+  }
+
+  setCurrentUser (userData) {
+    this.setState({currentUser: userData});
   }
 
   getCoinList () {
@@ -30,24 +38,14 @@ export default class App extends React.Component {
     });
   }
 
-  registerUser ({user, name, password}) {
-    daemon.post('/api/users').send({user, name, password})
-          .then((response) => {
-            console.log(response);
-          });
-  }
-
-  logInUser (data) {
-    const { user, password } = data;
-    daemon.post('/api/users/login').send({user, password})
-          .then((response) => {
-            console.log(response);
-          });
-  }
-
   render () {
+    const childrenWithProps = React.cloneElement(this.props.children, {
+      setCurrentUser: this.setCurrentUser,
+      currentUser: this.state.currentUser,
+    });
     return (
-      <div>
+      <div className="app-container">
+        {childrenWithProps}
       </div>
     );
   }
