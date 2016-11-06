@@ -1,30 +1,34 @@
 import React from 'react';
-import Modal from 'react-modal';
 import daemon from 'superagent';
 
+import ConversionsTab from './conversions_tab.jsx';
+
 const propTypes = {
-  currentUser: React.PropTypes.object,
   getHistory: React.PropTypes.func,
   getSpotData: React.PropTypes.func,
-  getCoinList: React.PropTypes.func,
-  openModal: React.PropTypes.func,
-  closeModal: React.PropTypes.func,
 };
 
-export default class DataOptions {
+export default class Dashboard extends React.Component {
   constructor () {
     super();
     this.state = {
-
+      coins: [],
     };
+  }
+
+  getConversion(coinFrom, coinTo) {
+    const data = this.props.getSpotData(coinFrom, coinTo);
+    return data.price;
   }
 
   render () {
     return (
       <div>
+        <h3>Dashboard</h3>
+        <ConversionsTab getConversion={this.getConversion} />
       </div>
     );
   }
 }
 
-DataOptions.propTypes = propTypes;
+Dashboard.propTypes = propTypes;

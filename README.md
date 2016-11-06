@@ -1,22 +1,28 @@
-daemon.post('/api/users/login').send({ user, password })
-          .then((response) => {
-            console.log(response);
-            this.props.router.push('/main/console');
-          });
-  static login (user, password) {
-    console.log('dao');
-    return firebase.auth().signInWithEmailAndPassword(user, password)
-      .catch((err) => {
-        console.log(`${err.code} ${err.message}`);
-      })
-      .then((user) => {
-        req.sesssion.currentUser = user;
-        console.log(user);
-        const userModel = new User(user);
-        return userModel;
-      });
+//menu tabs: conversions, line graphs, streamgraphs
+          2 coin dropdowns
+            coins vs fiat - experiment
+          display pane for coinsTo
+          options - toggles, checkboxes, input for interval, dropdowns for unit and period
+          x-axis is always time
+          linegraphs: y-axis is price or volume in COIN
+          stream: y is volume in COIN
+          ^+by exchange-?
+            all or one, not several - dropdown
+            how to get all supported exchanges? use coinsnapshot
+              trigger after coin:coin selected
+              if multiple coins look for exchanges meeting cross-section
+                else discard unsupported selections?
+  
+        //reusable components:
+          coin:coin(s) selector - dropdowns, selection pane
+          exchange-selection logic
+          interval/unit/period menu
+          
 
-  }
+        //helpers
+          graph frame/plane
+          graph drawing
+
 
 
 graphs

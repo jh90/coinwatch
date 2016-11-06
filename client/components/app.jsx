@@ -6,6 +6,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       currentUser: {},
+      coinList: [],
     };
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
@@ -14,37 +15,10 @@ export default class App extends React.Component {
     this.setState({currentUser: userData});
   }
 
-  getCoinList () {
-    daemon.get('/api/data/index')
-          .then((response) => {
-            console.log(response);
-          });
-  }
-
-  getSpotData (coinFrom, coinTo) {
-    daemon.get(`/api/data/?coinfrom=${coinFrom}&cointo=${coinTo}`)
-          .then((response) => {
-            console.log(response);
-          });
-  }
-
-  getHistory (data) {
-    const { unit, length, interval, coinFrom, coinTo, exchange } = data;
-    const eQuery = exchange ? `&exchange=${exchange}` : '';
-    const iQuery = interval ? `&interval=${interval}` : '';
-    const queryString = `unit=${unit}&length=${length-1}&coinFrom=${coinFrom}&coinTo=${coinTo}${eQuery}${iQuery}`;
-    daemon.get(`/api/data/histo?${queryString}`).then((response) => {
-      console.log(response);
-    });
-  }
-
   render () {
     const childrenWithProps = React.cloneElement(this.props.children, {
       setCurrentUser: this.setCurrentUser,
       currentUser: this.state.currentUser,
-      getHistory: this.getHistory,
-      getSpotData: this.getSpotData,
-      getCoinList: this.getCoinList,
     });
     return (
       <div className="app-container">
