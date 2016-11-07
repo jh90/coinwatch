@@ -12,10 +12,6 @@ class Nav extends React.Component {
     this.signOut = this.signOut.bind(this);
   }
 
-  componentDidMount () {
-    console.log(this.props.coinList);
-  }
-
   signOut () {
     firebase.auth().signOut().then(() => {
       this.props.router.push('/');
@@ -25,7 +21,6 @@ class Nav extends React.Component {
   render () {
     const childrenWithProps = React.cloneElement(this.props.children, {
       currentUser: this.props.currentUser,
-      coinList: this.props.coinList
     });
     return (
       <div>

@@ -1,3 +1,11 @@
+convert bw coins
+convert to fiat
+(compare) highlow charts
+(multi-line) price/volume graphs
+save (and publish) snapshots
+
+populate coinlist globally with script in indexhtml
+
 //menu tabs: conversions, line graphs, streamgraphs
           2 coin dropdowns
             coins vs fiat - experiment
@@ -23,6 +31,30 @@
           graph frame/plane
           graph drawing
 
+price, many prices over time
+volume, many volumes over time
+for coin:coin, coin:[coins]
+
+<select required className='coin-menu' onChange={this.handleBaseSelection} >
+            <option></option>
+            {this.displayCoinList()}
+          </select>
+          <select multiple required className='coin-menu' onChange={this.handleOutputSelections} >
+            {this.displayCoinList()}
+          </select>
+          <input type='submit' value='Search' />
+        </form>
+        <div>{`From ${this.state.coinFrom}`}</div>
+        <div>To:</div>
+        <ul>
+          {
+            this.state.coinsTo.map((coin) => {
+              return (
+                <li>{coin}</li>
+              );
+            })
+          }
+        </ul>
 
 
 graphs

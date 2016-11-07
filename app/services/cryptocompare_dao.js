@@ -10,7 +10,7 @@ class CryptoCompare {
                     const coinModels = [];
                     for (let sym in coins) {
                       const coin = coins[sym];
-                      const coinModel = new Coin(sym, coin.CoinName);
+                      const coinModel = new Coin(sym, coin.CoinName, coin.SortOrder);
                       coinModels.push(coinModel);
                     }
                     return coinModels;
@@ -20,13 +20,16 @@ class CryptoCompare {
   static spot (coinFrom, coinTo) {
     return daemon.get(`https://www.cryptocompare.com/api/data/price?fsym=${coinFrom}&tsyms=${coinTo}`)
                  .then((response) => {
-                    console.log(response.res.body, 'body');
                     const parsedResponse = JSON.parse(response.res.text);
-                    const cleanData = {
-                      price: parsedResponse.Data[0].Price,
-                      volume24hFrom: parsedResponse.Data[0].Volume24Hours,
-                      volume24hTo: parsedResponse.Data[0].VolumeTo24HoursTo,
-                    };
+                    const data = parsedResponse.Data;
+                    const cleanData = data.map((coin) => {
+                      const coinData = {
+                        price: coin.Price,
+                        volume24hFrom: coin.Volume24Hours,
+                        volume24hTo: coin.VolumeTo24HoursTo,
+                      };
+                      return coinData;
+                    });
                     return cleanData;
                  });
   }

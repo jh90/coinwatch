@@ -16,23 +16,6 @@ export default class Console extends React.Component {
     super();
   }
 
-  getSpotData (coinFrom, coinTo) {
-    daemon.get(`/api/data/?coinfrom=${coinFrom}&cointo=${coinTo}`)
-          .then((response) => {
-            return response;
-          });
-  }
-
-  getHistory (data) {
-    const { unit, length, interval, coinFrom, coinTo, exchange } = data;
-    const eQuery = exchange ? `&exchange=${exchange}` : '';
-    const iQuery = interval ? `&interval=${interval}` : '';
-    const queryString = `unit=${unit}&length=${length-1}&coinFrom=${coinFrom}&coinTo=${coinTo}${eQuery}${iQuery}`;
-    daemon.get(`/api/data/histo?${queryString}`).then((response) => {
-      return response;
-    });
-  }
-
   render () {
     return (
       <div>

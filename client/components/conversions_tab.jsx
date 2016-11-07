@@ -1,42 +1,43 @@
 import React from 'react';
+import daemon from 'superagent';
+import DataHelper from '../helpers/data_helper.js';
 
 import ConversionMenu from './conversion_menu.jsx';
-
-const propTypes = {
-  getConversion: React.PropTypes.func,
-};
+import MenuSpike from './menu_spike.jsx';
 
 export default class ConversionsTab extends React.Component {
   constructor () {
     super();
     this.state = {
-      coinFrom: '',
-      prices: [],
+      baseCoin: '',
+      prices: {},
     };
+    this.handleCoinSelections = this.handleCoinSelections.bind(this);
   }
 
   handleCoinSelections (coinFrom, coinsTo) {
-    const conversions = [];
+    let queryString = '';
     coinsTo.forEach((coinTo) => {
-      const price = this.props.getConversion(coinFrom, coinTo);
-      conversions.push({coinTo: price});
+      queryString = `${queryString}${coinTo},`;
     });
-    this.setState({prices: conversions});
+    queryString = queryString.slice(0, -1);
+    DataHelper.getPrice(coinFrom, queryString).then((data) => {
+      this.setState({prices: data,});
+    });
+    DataHelper.getSpotData(coinFrom, 'USD').then((data) => {console.log(data);});
   }
 
   render () {
     return (
       <div>
         <ConversionMenu handleSubmit={this.handleCoinSelections} />
-        <h3>{this.state.coinFrom}</h3>
+        <h3>{this.state.baseCoin}</h3>
         {
-          this.state.prices.map((price) => {
-            const sym = Object.keys(price)[0];
-            const conversion = price[sym];
+          $.map(this.state.prices, (price, base) => {
             return (
               <div>
-                <span>{sym}</span>
-                <span>{conversion}</span>
+                <span>{base}</span>
+                <span>{price}</span>
               </div>
             );
           })
@@ -45,5 +46,3 @@ export default class ConversionsTab extends React.Component {
     );
   }
 }
-
-ConversionsTab.propTypes = propTypes;
