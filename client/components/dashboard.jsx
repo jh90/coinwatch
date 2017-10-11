@@ -11,7 +11,7 @@ const propTypes = {
   closeModal: React.PropTypes.func,
 };
 
-export default class DataOptions extends React.Component {
+export default class Dashboard extends React.Component {
   constructor () {
     super();
     this.state = {
@@ -27,4 +27,4 @@ export default class DataOptions extends React.Component {
   }
 }
 
-DataOptions.propTypes = propTypes;
+Dashboard.propTypes = propTypes;
