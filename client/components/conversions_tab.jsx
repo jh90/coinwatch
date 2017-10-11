@@ -1,9 +1,9 @@
 import React from 'react';
 import daemon from 'superagent';
 import DataHelper from '../helpers/data_helper.js';
+import CurrencyHelper from '../helpers/currency_helper.js';
 
 import ConversionMenu from './conversion_menu.jsx';
-import MenuSpike from './menu_spike.jsx';
 
 export default class ConversionsTab extends React.Component {
   constructor () {
@@ -24,7 +24,7 @@ export default class ConversionsTab extends React.Component {
     DataHelper.getPrice(coinFrom, queryString).then((data) => {
       this.setState({prices: data,});
     });
-    DataHelper.getSpotData(coinFrom, 'USD').then((data) => {console.log(data);});
+    DataHelper.getSpotData(coinFrom, 'USD,EUR').then((data) => {console.log(data);});
   }
 
   render () {

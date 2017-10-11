@@ -1,0 +1,83 @@
+#header {
+  clear: all;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  margin: 0 auto;
+  text-align: right;
+  padding: 10px 0 10px 0;
+  color: blue;
+}
+
+.header {
+  display: inline;
+  margin: 0 50px 0 50px;
+}
+
+.header.name {
+  font-size: 25px;
+}
+
+.header.logout {
+  font-size: 18px;
+}
+
+#dashboard {
+  position: absolute;
+  left: 2em;
+  bottom: 0;
+  height: 35%;
+  width: 100%;
+  background-color: lightblue;
+}
+
+.dashboard {
+  display: inline;
+}
+
+.dashboard.nav {
+  float: left;
+  width: 15%;
+  height: 30%;
+  margin: 0 auto;
+}
+
+.tab {
+  font-size: .75rem;
+  border: 1px solid black;
+  margin: 0 auto;
+}
+
+.dashboard.content {
+  float: right;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.menu {
+  display: block;
+  width: 45%;
+  padding: 0;
+}
+
+.menu h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.submenu {
+  display: inline;
+}
+
+.submenu.coins-to form, ul {
+  display: inline;
+}
+
+.submenu.coins-to li {
+  list-style: none;
+  margin-left: 15px;
+}
+
+#generate {
+  margin-top: 20px;
+}

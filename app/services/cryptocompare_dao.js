@@ -43,7 +43,7 @@ class CryptoCompare {
                  .then((response) => {
                     const parsedResponse = JSON.parse(response.res.text);
                     const samples = parsedResponse.Data;
-                    const cleaned = samples.map((sample) => {
+                    const cleanData = samples.map((sample) => {
                       const cleanSample = {
                         closingPrice: sample.close,
                         volumeFrom: sample.volumefrom,
@@ -51,10 +51,6 @@ class CryptoCompare {
                       };
                       return cleanSample;
                     });
-                    const cleanData = {
-                      hasFirstValue: response.FirstValueInArray,
-                      data: cleaned,
-                    };
                     return cleanData;
                  });
   }

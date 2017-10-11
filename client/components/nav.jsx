@@ -24,9 +24,10 @@ class Nav extends React.Component {
     });
     return (
       <div>
-        <h1>NAV</h1>
-        <h3>{`Welcome, ${this.props.currentUser.name}!`}</h3>
-        <h3 onClick={this.signOut}>Sign Out</h3>
+        <div id='header'>
+          <p className='header name'>{this.props.currentUser.name}</p>
+          <p className='header logout' onClick={this.signOut}>Sign Out</p>
+        </div>
         {childrenWithProps}
       </div>
     );

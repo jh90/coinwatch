@@ -8,8 +8,6 @@ class UserDAO {
     return firebase.auth()
             .createUserWithEmailAndPassword(user, password)
             .then((registrant) => {
-              UserDAO.login(user, password);
-              // const userModel = new User({user, uid, displayName});
               registrant.updateProfile({displayName: name});
               firebase.database().ref('users')
                       .child(registrant.uid)

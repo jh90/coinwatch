@@ -6,6 +6,24 @@ save (and publish) snapshots
 
 populate coinlist globally with script in indexhtml
 
+getCoinList () {
+    const listArray = [];
+    daemon.get('/api/data/index')
+          .then((response) => {
+            response.body.forEach((coin) => {listArray.push(coin);});
+            this.setState({
+              allCoins: listArray,
+            });
+          });
+  }
+
+  <Chart
+        width: 960px;
+        height: 500px;
+      >
+        <
+      </Chart>
+
 //menu tabs: conversions, line graphs, streamgraphs
           2 coin dropdowns
             coins vs fiat - experiment

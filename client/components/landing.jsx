@@ -39,14 +39,12 @@ class Landing extends React.Component {
     const { user, name, password } = data;
     daemon.post('/api/users').send({ user, name, password })
           .then((response) => {
-            console.log(response);
             this.props.router.push('/main/console');
           });
   }
 
   logInUser (data) {
     const { user, password } = data;
-    console.log(data);
     firebase.auth().signInWithEmailAndPassword(user, password)
                    .then((user) => {
                       const userModel = {

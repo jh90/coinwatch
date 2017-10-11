@@ -1,5 +1,6 @@
 import React from 'react';
 import daemon from 'superagent';
+import CurrencyHelper from '../helpers/currency_helper.js';
 
 const propTypes = {
   handleSubmit: React.PropTypes.func,
@@ -11,7 +12,7 @@ export default class ConversionMenu extends React.Component {
     this.state = {
       coinFrom: '',
       coinsTo: [],
-      allCoins: [],
+      coinList: [],
       coinToSearchInput: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -19,19 +20,10 @@ export default class ConversionMenu extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getCoinList () {
-    const listArray = [];
-    daemon.get('/api/data/index')
-          .then((response) => {
-            response.body.forEach((coin) => {listArray.push(coin);});
-            this.setState({
-              allCoins: listArray,
-            });
-          });
-  }
-
   componentDidMount () {
-    this.getCoinList();
+    CurrencyHelper.then((currencies) => {
+      this.setState({coinList: currencies,});
+    });
   }
 
   handleChange (e) {
@@ -55,15 +47,6 @@ export default class ConversionMenu extends React.Component {
     });
   }
 
-  displayCoinList () {
-    return this.state.allCoins.map((coin) => {
-      return (
-        <option value={coin.sym}>
-         {coin.name} ({coin.sym})</option>
-      );
-    });
-  }
-
   handleAddSelection (e) {
     e.preventDefault();
     const stateClone = this.state.coinsTo;
@@ -71,6 +54,15 @@ export default class ConversionMenu extends React.Component {
     this.setState({coinsTo: stateClone,});
     const outCoinSearch = document.getElementById('out-coin-input');
     outCoinSearch.value = '';
+  }
+
+  displayCoinList () {
+    return this.state.coinList.map((coin) => {
+      return (
+        <option value={coin.sym}>
+         {coin.name} ({coin.sym})</option>
+      );
+    });
   }
 
   render () {
@@ -94,8 +86,6 @@ export default class ConversionMenu extends React.Component {
           <input type='submit' value='Add' />
         </form>
         <button onClick={this.handleSubmit}>Convert</button>
-        <div>{`From ${this.state.coinFrom}`}</div>
-        <div>To:</div>
         <ul>
           {
             this.state.coinsTo.map((coin) => {

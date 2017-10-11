@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import daemon from 'superagent';
-import firebase from '../../firebase.config.js';
 
 import Dashboard from './dashboard.jsx';
 import Window from './window.jsx';
@@ -14,14 +12,21 @@ const propTypes = {
 export default class Console extends React.Component {
   constructor () {
     super();
+    this.state = {
+      graphData: {},
+    };
+    this.handleGraphParams = this.handleGraphParams.bind(this);
+  }
+
+  handleGraphParams (data) {
+    this.setState({graphData: data,});
   }
 
   render () {
     return (
       <div>
-        <h1>CONSOLE</h1>
-        <Dashboard getSpotData={this.getSpotData}
-                   getHistory={this.getHistory} />
+        <Window graphParams={this.state.graphData} />
+        <Dashboard handleGraphParams={this.handleGraphParams} />
       </div>
     );
   }
