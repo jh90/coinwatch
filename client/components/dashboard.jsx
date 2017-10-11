@@ -11,7 +11,7 @@ const propTypes = {
   closeModal: React.PropTypes.func,
 };
 
-export default class DataOptions {
+export default class DataOptions extends React.Component {
   constructor () {
     super();
     this.state = {
